@@ -10,7 +10,7 @@
     "test:coverage": "jest --coverage --runInBand --silent",
     "seed": "dotenv cross-var docker exec %MONGO_DATABASE_CONTAINER% /seed/seeder.sh && npm run migrate:up",
     "reset": "dotenv cross-var docker exec %MONGO_DATABASE_CONTAINER% /seed/reset.sh && npm run migrate:up",
-    "migrate:up": "ENV=$(cat /home/ec2-user/env 2>/dev/null || echo dev) npx migrate up --store=./db/db-migrate-store.js --migrations-dir ./db/migrations",
+    "migrate:up": "npx migrate up --store=./db/db-migrate-store.js --migrations-dir ./db/migrations",
     "migrate:down": "ENV=$(cat /home/ec2-user/env 2>/dev/null || echo dev) npx migrate down --store=./db/db-migrate-store.js --migrations-dir ./db/migrations",
     "migrate:create": "ENV=$(cat /home/ec2-user/env 2>/dev/null || echo dev) npx migrate create --migrations-dir ./db/migrations",
     "lint": "eslint . --ext .js",
