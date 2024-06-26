@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const expenseSchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId, // Tipo ObjectId per riferire un utente nel database
-    ref: 'User', // Riferimento al modello User
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
     required: true
   },
   title: {
@@ -20,7 +20,7 @@ const expenseSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: Date.now
+    required: true
   }
 });
 

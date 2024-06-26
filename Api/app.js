@@ -62,7 +62,9 @@ fs.readdirSync(path.join(__dirname, '/routes'))
         checkCompany({ excludedPaths }),
         require(`./routes/${f}`)
       );
-    else app.use(`/${f}`, require(`./routes/${f}`));
+    else {
+      app.use(`/${f}`, require(`./routes/${f}`));
+    }
   });
 
 app.all('*', (req, res, next) => next(NotFound()));

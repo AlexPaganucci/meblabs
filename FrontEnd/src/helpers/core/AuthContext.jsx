@@ -100,6 +100,7 @@ export const AuthContextProvider = ({ children }) => {
     () => ({
       signOut,
       signIn,
+      userId: logged._id,
       logged,
       setLogged,
       setAuthStatus,

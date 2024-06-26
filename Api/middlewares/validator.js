@@ -43,7 +43,11 @@ fs.readdirSync(validatorPath)
   .forEach(file => {
     const f = path.parse(file).name;
     const schema = require(`${validatorPath}${f}.js`);
-    Object.keys(schema).forEach(key => ajv.addSchema(schema[key], key));
+    // Object.keys(schema).forEach(key => ajv.addSchema(schema[key], key));
+    Object.keys(schema).forEach(key => {
+      console.log(`Adding schema '${key}' to Ajv`);
+      ajv.addSchema(schema[key], key);
+    });
   });
 
 const errorParser = data => {
@@ -78,6 +82,7 @@ exports.validator = schemas => (req, res, next) => {
     const valid = validate(req[key]);
     if (!valid) return next(errorParser(validate.errors));
 
+    console.log(`Validation successful for '${key}':`, req[key]);
     return true;
   });
 
