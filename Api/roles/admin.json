@@ -9,5 +9,11 @@
   "companies": {
     "read": ["*"],
     "update": ["*"]
+  },
+  "expenses": {
+    "create": ["*"],
+    "read": ["*"],
+    "update": ["*"],
+    "delete": ["*"]
   }
 }

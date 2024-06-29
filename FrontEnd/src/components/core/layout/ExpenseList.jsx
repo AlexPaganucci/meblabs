@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { List, Skeleton, Button, Modal, Form, Input, message } from 'antd';
+import { Button, Modal, Form, Input, message, Card } from 'antd';
 import Api from '../../../helpers/core/Api';
 import AuthContext from '../../../helpers/core/AuthContext';
 
@@ -90,36 +90,32 @@ const ExpenseList = () => {
     setIsAddModalVisible(false);
   };
 
+  const formatDate = date => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(date).toLocaleDateString(undefined, options);
+  };
+
   return (
     <div>
-      <h2>Lista Spese</h2>
-      <Button type="primary" onClick={() => setIsAddModalVisible(true)}>
+      <Button type="primary" onClick={() => setIsAddModalVisible(true)} style={{ marginBottom: '16px' }}>
         Aggiungi Spesa
       </Button>
       {loading ? (
-        <Skeleton active />
+        <Card loading />
       ) : (
-        <List
-          dataSource={expenses}
-          renderItem={item => (
-            <List.Item
-              key={item._id}
-              actions={[
-                <Button key={`delete-${item._id}`} type="link" onClick={() => handleDeleteExpense(item._id)}>
-                  Cancella
-                </Button>,
-                <Button key={`edit-${item._id}`} type="link" onClick={() => showModal(item)}>
-                  Modifica
-                </Button>
-              ]}
-            >
-              <p>{item.title}</p>
-              <p>{item.description}</p>
-              <p>{item.amount}</p>
-              <p>{item.date}</p>
-            </List.Item>
-          )}
-        />
+        expenses.map(item => (
+          <Card key={item._id} title={item.title} style={{ marginBottom: 16 }}>
+            <p>{item.description}</p>
+            <p>Importo: € {item.amount}</p>
+            <p>Data: {formatDate(item.date)}</p>
+            <Button type="link" onClick={() => handleDeleteExpense(item._id)}>
+              Cancella
+            </Button>
+            <Button type="link" onClick={() => showModal(item)}>
+              Modifica
+            </Button>
+          </Card>
+        ))
       )}
 
       <Modal title="Modifica Spesa" visible={isModalVisible} onCancel={handleCancel} footer={null}>

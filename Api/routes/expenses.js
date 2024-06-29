@@ -2,13 +2,16 @@ const express = require('express');
 
 const router = express.Router();
 const expenseController = require('../controllers/expense');
+const { isAuth } = require('../middlewares/isAuth');
+const rbac = require('../middlewares/rbac');
 
-router.post('/', expenseController.createExpense);
+// Rotte per il controller expense
+router.post('/', isAuth, rbac('expenses', 'create'), expenseController.createExpense);
 
-router.get('/:userId', expenseController.getExpenses);
+router.get('/:userId', isAuth, rbac('expenses', 'read'), expenseController.getExpenses);
 
-router.put('/:id', expenseController.updateExpense);
+router.put('/:id', isAuth, rbac('expenses', 'update'), expenseController.updateExpense);
 
-router.delete('/:id', expenseController.deleteExpense);
+router.delete('/:id', isAuth, rbac('expenses', 'delete'), expenseController.deleteExpense);
 
 module.exports = router;

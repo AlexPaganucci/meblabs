@@ -11,5 +11,11 @@
     "read:any": ["*"],
     "update:any": ["*"],
     "delete:any": ["*"]
+  },
+  "expenses": {
+    "create": ["*"],
+    "read": ["*"],
+    "update": ["*"],
+    "delete": ["*"]
   }
 }

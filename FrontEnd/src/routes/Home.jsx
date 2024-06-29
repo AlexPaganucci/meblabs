@@ -3,8 +3,8 @@ import { Result } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 
-import HomePage from '../components/core/layout/HomePage';
 import ContentPanel from '../components/core/layout/ContentPanel';
+import ExpenseList from '../components/core/layout/ExpenseList';
 
 const Home = () => {
   const [loading] = useState(false);
@@ -17,7 +17,7 @@ const Home = () => {
         subTitle="Create an application to track daily expenses and incomes. Users should be able
         to add, read, update, and delete expense and income entries."
       />
-      <HomePage />
+      <ExpenseList />
     </ContentPanel>
   );
 };
